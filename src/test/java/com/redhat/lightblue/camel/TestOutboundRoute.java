@@ -31,27 +31,30 @@ public class TestOutboundRoute<T> extends RouteBuilder {
         from("lightblue://outboundPollingTest")
                 .bean(new LightblueErrorVerifier())
                 .bean(new LightblueResponseTransformer<T>(type))
-                .split(body(), new AggregationStrategy() {
-
-                    @Override
-                    public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-                        Object newBody = newExchange.getIn().getBody();
-                        ArrayList<Object> list = null;
-                        if (oldExchange == null) {
-                            list = new ArrayList<Object>();
-                            list.add(newBody);
-                            newExchange.getIn().setBody(list);
-                            return newExchange;
-                        } else {
-                            list = oldExchange.getIn().getBody(ArrayList.class);
-                            list.add(newBody);
-                            return oldExchange;
-                        }
-                    }
-                })
+                .split(body(), new ArrayListAggregationStrategy())
                 .convertBodyTo(Map.class)
                 .end()
                 .marshal(new JacksonXmlDataFormat())
                 .to("mock:result");
+    }
+
+    public static class ArrayListAggregationStrategy implements AggregationStrategy {
+
+        @Override
+        public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+            Object newBody = newExchange.getIn().getBody();
+            ArrayList<Object> list = null;
+            if (oldExchange == null) {
+                list = new ArrayList<Object>();
+                list.add(newBody);
+                newExchange.getIn().setBody(list);
+                return newExchange;
+            } else {
+                list = oldExchange.getIn().getBody(ArrayList.class);
+                list.add(newBody);
+                return oldExchange;
+            }
+        }
+
     }
 }

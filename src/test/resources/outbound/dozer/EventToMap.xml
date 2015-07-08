@@ -1,0 +1,19 @@
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozer.sourceforge.net  http://dozer.sourceforge.net/schema/beanmapping.xsd">
+  <mapping>
+    <class-a>com.redhat.lightblue.camel.model.Event</class-a>
+    <class-b>java.util.HashMap</class-b>
+    <field>
+      <a>id</a>
+      <b>_id</b>
+    </field>
+    <field>
+      <a>name</a>
+      <b>name</b>
+    </field>
+    <field>
+      <a>processed</a>
+      <b>processed</b>
+    </field>
+  </mapping>
+</mappings>

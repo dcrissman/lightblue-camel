@@ -1,7 +1,5 @@
 package com.redhat.lightblue.camel.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Event {
 
     private String id;
@@ -12,7 +10,6 @@ public class Event {
         return id;
     }
 
-    @JsonProperty("_id")
     public void setId(String id) {
         this.id = id;
     }

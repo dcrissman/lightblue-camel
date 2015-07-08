@@ -5,15 +5,15 @@
     <class-b>java.util.HashMap</class-b>
     <field>
       <a>id</a>
-      <b>_id</b>
+      <b>ID</b>
     </field>
     <field>
       <a>name</a>
-      <b>name</b>
+      <b>full_name</b>
     </field>
     <field>
       <a>processed</a>
-      <b>processed</b>
+      <b>status</b>
     </field>
   </mapping>
 </mappings>

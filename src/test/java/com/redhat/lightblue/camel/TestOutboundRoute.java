@@ -11,6 +11,7 @@ import org.apache.camel.converter.dozer.DozerTypeConverterLoader;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 
 import com.redhat.lightblue.camel.utils.JacksonXmlDataFormat;
+import com.redhat.lightblue.camel.utils.JacksonXmlDataFormat.Config;
 import com.redhat.lightblue.camel.utils.LightblueErrorVerifier;
 import com.redhat.lightblue.camel.utils.LightblueResponseTransformer;
 
@@ -34,7 +35,7 @@ public class TestOutboundRoute<T> extends RouteBuilder {
                 .split(body(), new ArrayListAggregationStrategy())
                 .convertBodyTo(Map.class)
                 .end()
-                .marshal(new JacksonXmlDataFormat())
+                .marshal(new JacksonXmlDataFormat(new Config().setRootName("events")))
                 .to("mock:result");
     }
 
